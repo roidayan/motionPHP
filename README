@@ -1,0 +1,10 @@
+motionPHP is a web based front end for the motion detection software Motion.
+
+Features:
+
+- See the latest captured events
+- See all frames for an event
+- View the events recorded by different cameras
+- Watch the recorded video (swf, mpeg etc) of an event
+
+This is my first PHP project and is very much a work in progress. Documentation is coming soon.
