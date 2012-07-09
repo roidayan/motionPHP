@@ -1,0 +1,65 @@
+<?php
+//includes
+include('includes/header.php');
+include('includes/option_menu.php');
+
+
+
+
+//query
+//Get latest events from database. The order and limit of the results are defined by what is set in
+//the drop down list in /includes/option_menu.php. If nothing is set defaults are used.
+			
+$query = "SELECT id, camera, event_id, filename, frame, file_type, time_stamp, event_time_stamp, TIMESTAMPDIFF( 
+SECOND , MIN( time_stamp ) , MAX( time_stamp ) ) AS length
+FROM security WHERE camera = $camera GROUP BY event_id 
+ORDER BY $order_criteria $order_by 
+LIMIT $limit";
+			
+
+$result = mysqli_query($connection, $query) or die ("Query Error: $query. ".mysql_error());
+?>
+
+
+
+
+<div id="event_preview_container">
+<?php
+
+//Main loop displays the latest events and their details. 
+while($row = mysqli_fetch_array($result))
+{
+
+	//convert the event's time stamp from a string to a timestamp.
+	$timestamp = strtotime($row[event_time_stamp]);
+	
+	//Display each event and its details.
+	echo '<div class="image_container">
+';	//Display an image of the event and link to the event page for that event.
+	echo '	<a href="event.php?id='.$row[event_id].'"><img class="event_preview" src="'.$image_path.$row[filename].'-0'.$row[frame]. '.jpg"/></a>
+';
+	echo '	<ul class=class="detail-list">
+	';
+	//Format the date to show the length of an event.
+	echo '	<li>Length: '.date('H:i:s', $row[length]).'</li>
+	';
+	//Get the time of the event.
+	echo '	<li>Time: '.date('l jS F Y h:i:s A',$timestamp).'</li>
+	';
+	//Camera number
+	echo '	<li>Camera: '.$row[camera].'</li>
+	';
+	echo '</div>
+';
+}
+
+
+?>
+</div>
+
+
+
+<?php
+//footer.
+include('includes/footer.php');
+?>
