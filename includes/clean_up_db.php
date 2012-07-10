@@ -2,6 +2,9 @@
 
 require('conf.php');
 
+//Set the number of days to keep database entries for.
+$no_days = 7;
+
 //get the original amount of rows.
 $query = "SELECT * FROM security";
 $result = mysqli_query($connection, $query) or die("Query Error: $query. ".mysql_error());
@@ -11,7 +14,7 @@ $original_count = mysqli_num_rows($result);
 //echo $original_count;
 
 //perform delete query. Deletes records older than 7 days.
-$query_delete = "delete from security where event_time_stamp<DATE_SUB(curdate(), INTERVAL 7 DAY)" ;
+$query_delete = "delete from security where event_time_stamp<DATE_SUB(curdate(), INTERVAL $no_days DAY)" ;
 $result_delete = mysqli_query($connection, $query_delete)or die ("Query Error: $query_delete. ".mysql_error());
 
 //get the new count of rows.

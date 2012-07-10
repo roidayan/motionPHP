@@ -1,4 +1,10 @@
 <?php
+
+//get current page
+$page = basename($_SERVER['REQUEST_URI']);
+echo $page;
+
+
 //option menu
 $limit_options = array(6,9,12,15);
 $order_sort_options = array('ASC', 'DESC');
@@ -15,18 +21,36 @@ while($row_camera = mysqli_fetch_array($result_camera))
 	
 }
 
+
+
 //Check for POST. I.e. check whether any sorting has been applied.
 if(isset($_POST['submit_options']))
 {
-	//Set the amount of previews to show
-	if(isset($_POST['preview_limit']))
+	if(strpos($page, 'index.php') !==false)
 	{
-		$limit = $_POST['preview_limit'];
+		//Set the amount of previews to show
+		if(isset($_POST['preview_limit']))
+		{
+			$limit = $_POST['preview_limit'];
+		}
+		//but if its not set then set it to the default 6.
+		else
+		{
+			$limit = '%';
+		}
 	}
-	//but if its not set then set it to the default 6.
-	else
+	elseif(strpos($page, 'archive.php') !==false)
 	{
-		$limit = 6;
+		//Set the amount of previews to show
+		if(isset($_POST['preview_limit']))
+		{
+			$limit = $_POST['preview_limit'];
+		}
+		//but if its not set then set it to the default 6.
+		else
+		{
+			$limit = '%';
+		}
 	}
 	//Set the order to show previews in.
 	if(isset($_POST['preview_order']))
@@ -73,6 +97,7 @@ else
 	<form action="<?php echo $_server['PHP_SELF']; ?>" method="post">
 		<label>Show:</label>
 		<select name="preview_limit">
+			
 			<?php 
 				foreach($limit_options as $l)
 				{

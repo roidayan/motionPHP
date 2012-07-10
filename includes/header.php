@@ -17,7 +17,7 @@ require('includes/conf.php');
 
 <div id="header">
 	
-	<h1>php-Motion</h1>
+	<h1>motionPHP</h1>
 
 	<ul>
 		<li><a href="index.php">Home</a></li>

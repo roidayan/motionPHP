@@ -4,6 +4,7 @@ include('includes/header.php');
 
 //page variables
 
+//check that an id is set in GET and store it for use.
 if(isset($_GET['id']))
 	{
 		$event_id  = $_GET['id'];
@@ -44,6 +45,7 @@ $timestamp = strtotime($row_length[event_time_stamp]);
 	</video>
 	<ul id="video-details" class="detail-list">
 		<?php
+			//Details 
 			echo '<li>Length: '.date('H:i:s', $row_length['length']).'</li>';
 			echo '<li>Time: '.date('l jS F Y h:i:s A',$timestamp).'</li>';
 			echo '<li>Frames: '.$row_length['frame_count'].'</li>';
