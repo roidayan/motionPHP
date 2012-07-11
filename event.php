@@ -50,6 +50,29 @@ $timestamp = strtotime($row_length[event_time_stamp]);
 			echo '<li>Time: '.date('l jS F Y h:i:s A',$timestamp).'</li>';
 			echo '<li>Frames: '.$row_length['frame_count'].'</li>';
 		?>
+		<li class"delete_event">
+			<?php 
+				echo '<form action="'.$_server['PHP_SELF'].'" method="post">';
+				if(!isset($_POST['submit_delete']))
+				{
+					echo '<input type="submit" value="Delete" name="submit_delete"/>';
+				}
+				else
+				{
+					echo '<strong>Are you sure?</strong>';
+					echo '<input type="submit" value="Yes" name="delete_event"/>';
+					echo '<input type="submit" value="No" name="delete_event_false"/>';
+					echo '<span>Deleting will not remove the files</span>';
+				}
+				if(isset($_POST['delete_event']))
+					{
+						$query_delete = "DELETE FROM security WHERE event_id = $event_id";
+						$result_delete = mysqli_query($connection, $query_delete) or die ("Query Error: $query_delete. ".mysql_error());
+						header('Location: index.php');
+					}
+				echo '</form>';
+			?>
+		</li>
 	</ul>
 </div>
 
