@@ -12,10 +12,11 @@ include('includes/option_menu.php');
 			
 $query = "SELECT id, camera, event_id, filename, frame, file_type, time_stamp, event_time_stamp, TIMESTAMPDIFF( 
 SECOND , MIN( time_stamp ) , MAX( time_stamp ) ) AS length
-FROM security WHERE camera = $camera GROUP BY event_id 
+FROM security WHERE DATE(event_time_stamp) LIKE '$date' AND camera LIKE $camera GROUP BY event_id 
 ORDER BY $order_criteria $order_by 
 LIMIT $limit";
-			
+
+//echo $query;			
 
 $result = mysqli_query($connection, $query) or die ("Query Error: $query. ".mysql_error());
 ?>

@@ -1,4 +1,13 @@
 <?php
+/**
+	Page:
+	Author:
+	Description:
+**/
+?>
+
+
+<?php
 //includes
 include('includes/header.php');
 include('includes/option_menu.php');
@@ -16,8 +25,10 @@ else
 	$date_sql_str = "'%'";
 }
 
-$query_dates = "SELECT DATE(event_time_stamp) as date, event_time_stamp from security GROUP BY date";
-$result_dates = mysqli_query($connection, $query_dates) or die ("Query Error: $query_dates. " .mysqli_error());
+//This query gets the dates (not the whole timestamp) with events. The intention is to have a list of days
+//which can be clicked to show just events for that day.
+//$query_dates = "SELECT DATE(event_time_stamp) as date, event_time_stamp from security GROUP BY date";
+//$result_dates = mysqli_query($connection, $query_dates) or die ("Query Error: $query_dates. " .mysqli_error());
 
 
 
@@ -39,6 +50,7 @@ $result = mysqli_query($connection, $query) or die ("Query Error: $query. ".mysq
 ?>
 
 <ul>
+<li></li>
 <?php
 //print days.
 while($row = mysqli_fetch_array($result_dates))
@@ -46,8 +58,10 @@ while($row = mysqli_fetch_array($result_dates))
 
 	//get date from query
 	$date_archive = $row['date'];
-
-	echo '<li><a href="?date='.$date_archive.'">'.$date_archive.'</a></li>';
+	//Convert it to a timestamp so we can convert it into a readable format below with date()
+	$date_archive_r = strtotime($date_archive);
+	//print the link for each day in the database.
+	echo '<li><a href="?date='.$date_archive.'">'.date('l jS F Y',$date_archive_r).'</a></li>';
 
 }
 

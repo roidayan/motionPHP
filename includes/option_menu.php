@@ -1,56 +1,61 @@
 <?php
-
-
-
-
+/**
+	Page:
+	Author:
+	Description:
+**/
+?>
+<?php
 //option menu
+
+
 $limit_options = array(6,9,12,15);
 $order_sort_options = array('ASC', 'DESC');
 $order_criteria_options = array('length','event_time_stamp');
 $no_cameras = array(); //gets items for the array in the camera query below
+$dates = array(); // stores the dates in database in an arary
+//Queries for filling some dropdown lists.
 
-//Cameras
 //Find out how many cameras there are in the database.
 $query_camera = "SELECT DISTINCT camera FROM security ORDER BY camera ASC";
 $result_camera = mysqli_query($connection, $query_camera) or die ("Query Error: $query_camera. ".mysql_error());
+
+//Find out dates stored 
+$query_dates = "SELECT DATE(event_time_stamp) as date, event_time_stamp from security GROUP BY date";
+$result_dates = mysqli_query($connection, $query_dates) or die ("Query Error: $query_dates. " .mysqli_error());
+
+//Add cameras to array
 while($row_camera = mysqli_fetch_array($result_camera))
 {
 	array_push($no_cameras,$row_camera['camera']);
-	
+}
+//Add dates to array
+while($row_dates = mysqli_fetch_array($result_dates))
+{
+	array_push($dates,$row_dates['date']);
 }
 
-
-
 //Check for POST. I.e. check whether any sorting has been applied.
-if(isset($_POST['submit_options']))
+if(!isset($_POST['submit_options']))
 {
-	if(strpos($page, 'index.php') !==false)
+	$limit = 6;
+	$order_by = 'DESC';
+	$order_criteria = 'event_time_stamp';
+	$camera = 1;
+	$date = '%';
+}
+else
+{
+	//Set the amount of previews to show
+	if(isset($_POST['preview_limit']))
 	{
-		//Set the amount of previews to show
-		if(isset($_POST['preview_limit']))
-		{
-			$limit = $_POST['preview_limit'];
-		}
-		//but if its not set then set it to the default 6.
-		else
-		{
-			$limit = '%';
-		}
+		$limit = $_POST['preview_limit'];
 	}
-	elseif(strpos($page, 'archive.php') !==false)
+	//but if its not set then set it to the default 6.
+	else
 	{
-		//Set the amount of previews to show
-		if(isset($_POST['preview_limit']))
-		{
-			$limit = $_POST['preview_limit'];
-		}
-		//but if its not set then set it to the default 6.
-		else
-		{
-			$limit = '%';
-		}
+		$limit = 6;
 	}
-	//Set the order to show previews in.
 	if(isset($_POST['preview_order']))
 	{
 		$order_by = $_POST['preview_order'];
@@ -80,22 +85,25 @@ if(isset($_POST['submit_options']))
 	{
 		$camera = 1;
 	}
-	
-}
-else
-{
-	//defaults if no POST
-	$limit = 6;
-	$order_by = 'DESC';
-	$order_criteria = 'event_time_stamp';
-	$camera = 1;
+	//Set date to view
+	if(isset($_POST['date']))
+	{
+		$date = $_POST['date'];
+	}
+	//else set it to the default of 1.
+	else
+	{
+		$date = '%';
+	}
 }
 ?>
+
+
 <div id="options_menu">
 	<form action="<?php echo $_server['PHP_SELF']; ?>" method="post">
 		<label>Show:</label>
 		<select name="preview_limit">
-			
+		<option value="2147483647">All</option>	
 			<?php 
 				foreach($limit_options as $l)
 				{
@@ -107,8 +115,24 @@ else
 			?>
 		</select>
 		
+		<label>date:</label>
+		<select name="date">
+		<option value="%">All</option>
+			<?php 
+				foreach($dates as $d)
+				{
+					if($date == $d)
+						{echo '<option selected="selected" value="'.$d.'">'.$d.'</option>';}
+					else
+						{echo '<option value="'.$d.'">'.$d.'</option>';}
+				}
+			?>
+			
+		</select>
 		<label>camera:</label>
+
 		<select name="camera">
+		<option value="'%'">All</option>
 			<?php 
 				foreach($no_cameras as $c)
 				{
