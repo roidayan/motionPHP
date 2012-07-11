@@ -1,6 +1,11 @@
 <?php
 require('includes/conf.php');
+//get current page
+$page = basename($_SERVER['REQUEST_URI']);
+echo $page;
+
 ?>
+
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 

@@ -1,8 +1,6 @@
 <?php
 
-//get current page
-$page = basename($_SERVER['REQUEST_URI']);
-echo $page;
+
 
 
 //option menu
