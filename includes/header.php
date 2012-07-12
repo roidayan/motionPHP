@@ -10,7 +10,7 @@ require('includes/conf.php');
 
 //get current page
 $page = basename($_SERVER['REQUEST_URI']);
-echo $page;
+//echo $page;
 
 
 
@@ -27,6 +27,8 @@ echo $page;
 
 <head>
 
+<script type='text/javascript' src="jquery.flipbook.js"></script>
+<script type='text/javascript' src='jquery-1.7.2.min.js'></script>
 <title>motionPHP Home</title>
 
 </head>
@@ -36,7 +38,7 @@ echo $page;
 	
 	<h1>motionPHP</h1>
 
-	<ul>
+	<ul id="menu">
 		<li><a href="index.php">Home</a></li>
 		<li><a href="live.php">Live</a></li>
 		<!--<li><a href="archive.php">Archive</a></li>-->

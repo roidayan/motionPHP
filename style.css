@@ -1,10 +1,38 @@
 body{
+	margin:0px 0px 20px 20px;
+	padding:0;
+	font-family: 'Arial', sans-serif;
+}
+
+#header{
+	margin-top:40px;
+	height:80px;
+}
+h1{
+	float:left;
 	margin:0;
 	padding:0;
 }
+
+#menu
+{
+	
+	margin:0;
+	margin-top:15px;
+	padding:0;
+	display:block;
+	list-style-type:none;
+	float:left;
+}
+
+#menu li
+{
+	display:inline;
+	
+}
 #content{
 
-
+clear:both;
 }
 .event_preview
 {
@@ -13,7 +41,6 @@ body{
 }
 .image_container
 {
-	
 	width:30%;
 	float:left;
 	margin:10px;

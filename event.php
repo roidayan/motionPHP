@@ -39,10 +39,17 @@ $timestamp = strtotime($row_length[event_time_stamp]);
 
 ?>
 
+<?php //do{echo $image_path.$row_frames['filename'].'-0'.$row_frames['frame']. '.jpg, ';}while($row_frames = mysqli_fetch_array($result_frames))?>
+
+
+
 <div id="video">
 	<video controls="controls">
 		<source src="<?php echo $image_path.$event_id ?>"/>
 	</video>
+	
+
+		
 	<ul id="video-details" class="detail-list">
 		<?php
 			//Details 
