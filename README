@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 motionPHP is a web based front end for the motion detection software Motion (http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome).
 
 Features:
@@ -20,4 +20,3 @@ Features:
 - Watch the recorded video (swf, mpeg etc) of an event
 
 This is my first PHP project and is very much a work in progress. Documentation is coming soon.
->>>>>>> fbec3a280f7f814f7d12047b29114e762d4c5601

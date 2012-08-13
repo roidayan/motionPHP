@@ -2,21 +2,12 @@
 //includes
 include('includes/header.php');
 
-<<<<<<< HEAD
+
 ?>
 
-<ul id="statistics">
-	<li>Total events</li>
-	<li>Total time recorded</li>
-	<li>Amount of days in database</li>
-	<li>Average events per hour</li>
-	<li>Average length of event</li>
-	<li></li>
-	<li></li>
 
-</ul>
 
-=======
+<?php
 //initialize variables
 $total_events = 0;
 $total_length = 0;
@@ -31,7 +22,7 @@ $query_dates = "SELECT DATE(event_time_stamp) as date, event_time_stamp from sec
 $result_dates = mysqli_query($connection, $query_dates) or die ("Query Error: $query_dates. " .mysqli_error());
 
 
-while($row_dates =  mysqli_fetch_array($result_dates))
+while($row_dates =  mysqli_fetch_array($result_da0tes))
 {
 	$number_of_days ++;
 }
@@ -89,7 +80,7 @@ $average_events_hour =  $total_events /$total_hours;
 
 
 
->>>>>>> fbec3a280f7f814f7d12047b29114e762d4c5601
+
 <?php
 //footer.
 include('includes/footer.php');

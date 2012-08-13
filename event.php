@@ -17,16 +17,22 @@ else
 
 //queries
 //Query to get all the frames and event_time_stamp from the specified event id.
-$query_frames = "SELECT event_time_stamp,frame, filename FROM security WHERE event_id = $event_id ORDER BY time_stamp ASC";
+$query_frames = "SELECT event_time_stamp,frame, filename FROM security WHERE event_id = $event_id AND file_type = 1 ORDER BY time_stamp ASC";
 $result_frames = mysqli_query($connection, $query_frames) or die ("Query Error: $query_frames ".mysql_error());
 $row_frames = mysqli_fetch_array($result_frames);
+
+//Query to get filename of movie.
+
+$query_video = "SELECT event_time_stamp,frame, filename FROM security WHERE event_id = $event_id AND file_type = 8";
+$result_video = mysqli_query($connection, $query_video) or die ("Query Error: $query_video ".mysql_error());
+$row_video = mysqli_fetch_array($result_video);
 
 
 //Query to get details of the current event in the loop. Use's the above loop's $row[event_id]
 //in the WHERE clause. Also gets the latest(max) and earliest(min) timestamps in order to work 
 //out the length of an event (which is possibly a second too long).
 $query_details = "SELECT COUNT(frame) as frame_count, event_time_stamp, TIMESTAMPDIFF( 
-SECOND , MIN( time_stamp ) , MAX( time_stamp ) ) AS length FROM security WHERE event_id = $event_id";
+SECOND , MIN( time_stamp ) , MAX( time_stamp ) ) AS length FROM security WHERE file_type = 1 AND event_id = $event_id" ;
 $result_length = mysqli_query($connection, $query_details) or die ("Query Error: $query_details. ".mysql_error());
 
 
@@ -39,23 +45,21 @@ $timestamp = strtotime($row_length[event_time_stamp]);
 
 ?>
 
-<<<<<<< HEAD
-=======
+
 <?php //do{echo $image_path.$row_frames['filename'].'-0'.$row_frames['frame']. '.jpg, ';}while($row_frames = mysqli_fetch_array($result_frames))?>
 
 
 
->>>>>>> fbec3a280f7f814f7d12047b29114e762d4c5601
-<div id="video">
-	<video controls="controls">
-		<source src="<?php echo $image_path.$event_id ?>"/>
-	</video>
-<<<<<<< HEAD
-=======
-	
 
+<div id="video">
+	
 		
->>>>>>> fbec3a280f7f814f7d12047b29114e762d4c5601
+		
+		<object data="<?php echo $image_path.$row_video['filename'].'.avi' ?>" width="640" height="360">
+	   		<embed src="<?php echo $image_path.$row_video['filename'].'.avi' ?>" width="640" height="360" />
+	  	</object> 
+
+
 	<ul id="video-details" class="detail-list">
 		<?php
 			//Details 
@@ -90,9 +94,10 @@ $timestamp = strtotime($row_length[event_time_stamp]);
 </div>
 
 <ol id="frame_list">
+
 <?php
 
-
+//loop to display all frames.
 do{
 	echo '<li><a href="'.$image_path.$row_frames['filename'].'-0'.$row_frames['frame']. '.jpg"><img class="frame_event_preview" src="'.$image_path.$row_frames['filename'].'-0'.$row_frames['frame']. '.jpg"/></a></li>';
 }while($row_frames = mysqli_fetch_array($result_frames))
