@@ -11,7 +11,7 @@ require('includes/conf.php');
 
 //get current page
 $page = basename($_SERVER['REQUEST_URI']);
-echo $page;
+//echo $page;
 
 
 
@@ -37,12 +37,9 @@ echo $page;
 	
 	<h1>motionPHP</h1>
 
-	<ul>
-		<li><a href="index.php">Home</a></li>
-		<li><a href="live.php">Live</a></li>
-		<!--<li><a href="archive.php">Archive</a></li>-->
-		<li><a href="statistics.php">Stats</a></li>
-	</ul>
+	<? //menu 
+	include('includes/menu.php');
+	?>
 
 
 	
