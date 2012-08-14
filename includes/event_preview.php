@@ -28,7 +28,7 @@ while($row = mysqli_fetch_array($result))
 ';	//Display an image of the event and link to the event page for that event.
 	echo '	<a href="event.php?id='.$row[event_id].'"><img class="event_preview" src="'.$image_path.$row[filename].'-0'.$row[frame]. '.jpg"/></a>
 ';
-	echo '	<ul class=class="detail-list">
+	echo '	<ul class="detail-list">
 	';
 	//Format the date to show the length of an event.
 	echo '	<li>Length: '.date('H:i:s', $row[length]).'</li>

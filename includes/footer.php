@@ -1,5 +1,7 @@
 
-</div>
+
+<div class="push"></div>
+</div><!--end container-->
 <div id="footer">
 	
 	<div id="footer_menu">
@@ -24,8 +26,8 @@
 			<li><a href="https://github.com/robincawser/motionPHP">Github project page</a></li>
 		</ul>
 	</div>
-</div>
-</div>
+</div><!--end footer-->
+
 </body>
 </html>
 
