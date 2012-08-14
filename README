@@ -9,3 +9,25 @@ Features:
 - Watch the recorded video (swf, mpeg etc) of an event
 
 This is my first PHP project and is very much a work in progress. Documentation is coming soon.
+
+
+Documentation (this is just the jist, full documentation will be written soon): 
+Motion must be compiled with mysql for motionPHP to work, and must be compiled with ffmpeg if you want videos to work.
+
+Certain options in Motion's config file have to set in order to be compatible with motionPHP [needs completing]
+
+Create the following table in database "motion" (or whatever table is defined in includes/conf.php)
+
+CREATE TABLE IF NOT EXISTS `security` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `camera` int(11) NOT NULL,
+  `event_id` bigint(20) NOT NULL,
+  `filename` char(80) NOT NULL,
+  `frame` int(11) NOT NULL,
+  `file_type` int(11) NOT NULL,
+  `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `event_time_stamp` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5734 ;
+
+Next, create a user, or assign an existing user to the database with full privileges. Enter the user details in includes/conf.php.
