@@ -14,6 +14,7 @@ $order_sort_options = array('ASC', 'DESC');
 $order_criteria_options = array('length','event_time_stamp');
 $no_cameras = array(); //gets items for the array in the camera query below
 $dates = array(); // stores the dates in database in an arary
+$longer_than_options = array(0,5,10,15,30,60,120,240); //time in seconds to filter by
 //Queries for filling some dropdown lists.
 
 //Find out how many cameras there are in the database.
@@ -43,6 +44,7 @@ if(!isset($_POST['submit_options']))
 	$order_criteria = 'event_time_stamp';
 	$camera = 1;
 	$date = '%';
+	$longer_than = 30;
 }
 else
 {
@@ -95,6 +97,16 @@ else
 	{
 		$date = '%';
 	}
+	//Set longer than filter.
+	if(isset($_POST['longer_than']))
+	{
+		$longer_than = $_POST['longer_than'];
+	}
+	//else set it to the default of 30.
+	else
+	{
+		$longer_than = 30;
+	}
 }
 ?>
 
@@ -121,10 +133,32 @@ else
 			<?php 
 				foreach($dates as $d)
 				{
+					$timestamp = strtotime($d);
+
 					if($date == $d)
-						{echo '<option selected="selected" value="'.$d.'">'.$d.'</option>';}
+						{
+							if(date("Y-m-d",$timestamp) == date("Y-m-d"))
+							{
+								echo '<option selected="selected" value="'.$d.'">Today</option>';
+							}
+							else
+							{
+								echo '<option selected="selected" value="'.$d.'">'.date('d/m/Y',$timestamp).'</option>';
+							}
+							
+						}
 					else
-						{echo '<option value="'.$d.'">'.$d.'</option>';}
+						{
+							if(date("Y-m-d",$timestamp) == date("Y-m-d"))
+							{
+								echo '<option value="'.$d.'">Today</option>';
+							}
+							else
+							{
+								echo '<option value="'.$d.'">'.date('d/m/Y',$timestamp).'</option>';
+							}
+							
+						}
 				}
 			?>
 			
@@ -143,17 +177,38 @@ else
 				}
 			?>
 		</select>
-		
-		<label>, Sort by:</label>
+
+		<label>longer than:</label>
+		<select name="longer_than">
+			<?php 
+				foreach($longer_than_options as $lt)
+				{
+					if($longer_than == $lt)
+						{echo '<option selected="selected" value="'.$lt.'">'.date('i:s', $lt).'</option>';}
+					else
+						{echo '<option value="'.$lt.'">'.date('i:s', $lt).'</option>';}
+				}
+			?>
+		</select>
+
+
+		<label>Sort by:</label>
 		<select name="preview_order_criteria">
 			<?php 
 				foreach($order_criteria_options as $oc)
 				{
-					
+					if($oc == "event_time_stamp")
+					{
+						$oc_e = "Date";
+					}
+					elseif($oc =="length")
+					{
+						$oc_e = "Length";
+					}
 					if($order_criteria == $oc)
-						{echo '<option selected="selected" value="'.$oc.'">'.$oc.'</option>';}
+						{echo '<option selected="selected" value="'.$oc.'">'.$oc_e.'</option>';}
 					else
-						{echo '<option value="'.$oc.'">'.$oc.'</option>';}
+						{echo '<option value="'.$oc.'">'.$oc_e.'</option>';}
 				}
 			?>
 		</select>
@@ -162,17 +217,24 @@ else
 			<?php 
 				foreach($order_sort_options as $o)
 				{
-					
+					if($o == "ASC")
+					{
+						$o_e = "Ascending";
+					}
+					elseif($o =="DESC")
+					{
+						$o_e = "Descending";
+					}
 					if($order_by == $o)
-						{echo '<option selected="selected" value="'.$o.'">'.$o.'</option>';}
+						{echo '<option selected="selected" value="'.$o.'">'.$o_e.'</option>';}
 					else
-						{echo '<option value="'.$o.'">'.$o.'</option>';}
+						{echo '<option value="'.$o.'">'.$o_e.'</option>';}
 				}
 			?>
 		</select>
 		
 		
 		
-		<input type="submit" value="Submit" name="submit_options"/>
+		<input type="submit" value="Go" name="submit_options"/>
 	</form>
 </div>

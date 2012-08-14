@@ -1,15 +1,17 @@
 
 <?php
-//includes
+//header
 include('includes/header.php');
-include('includes/option_menu.php');
+
 ?>
 
 
 
-
+<h2>Latest events</h2>
 
 <?php
+
+include('includes/option_menu.php');
 //include main loop that displays the event preview images and details
 include('includes/event_preview.php');
 

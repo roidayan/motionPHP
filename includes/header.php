@@ -13,7 +13,7 @@ require('includes/conf.php');
 $page = basename($_SERVER['REQUEST_URI']);
 //echo $page;
 
-
+//echo date();
 
 
 
@@ -32,7 +32,7 @@ $page = basename($_SERVER['REQUEST_URI']);
 
 </head>
 <body>
-
+<div id="container">
 <div id="header">
 	
 	<h1>motionPHP</h1>

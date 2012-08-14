@@ -16,7 +16,7 @@
 	</div>
 	
 	<div id="footer_credits">
-		<h2>Credits and License</h2>
+		<h2>Credits and license</h2>
 		<ul>
 			<li>Written by <a href="http://robcaw.com">Robin Cawser</a></li>
 			<li>Released under the 
@@ -25,7 +25,7 @@
 		</ul>
 	</div>
 </div>
-
+</div>
 </body>
 </html>
 

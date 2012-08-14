@@ -1,9 +1,4 @@
 <div id="event_preview_container">
-
-
-
-
-
 <?php
 //query
 //Get latest events from database. The order and limit of the results are defined by what is set in
@@ -11,7 +6,9 @@
 			
 $query = "SELECT id, camera, event_id, filename, frame, file_type, time_stamp, event_time_stamp, TIMESTAMPDIFF( 
 SECOND , MIN( time_stamp ) , MAX( time_stamp ) ) AS length
-FROM security WHERE DATE(event_time_stamp) LIKE '$date' AND camera LIKE $camera GROUP BY event_id 
+FROM security WHERE DATE(event_time_stamp) LIKE '$date' AND camera LIKE $camera 
+GROUP BY event_id 
+HAVING TIMESTAMPDIFF( SECOND , MIN( time_stamp ) , MAX( time_stamp ) ) > $longer_than
 ORDER BY $order_criteria $order_by 
 LIMIT $limit";
 
