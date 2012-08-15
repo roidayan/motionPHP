@@ -132,20 +132,24 @@ $(document).ready(function() {
 	//$('#testing').text($.cookie('options_menu_status'));
 
 
-	if($.cookie('options_menu_status').indexOf( 'hidden' ) > -1 ) //if menu is hidden
+	if($.cookie('options_menu_status') == null)
 	{
-		$('#options_menu').hide(); 
-		$('#testing').text($.cookie('options_menu_status'));
+		$('#options_menu').hide();
 	}
-	else if($.cookie('options_menu_status').indexOf( 'visible' ) > -1 )
+	else
 	{
-		$('#options_menu').show();
-		$('#testing').text($.cookie('options_menu_status'));
+		if($.cookie('options_menu_status').indexOf( 'hidden' ) > -1 ) //if menu is hidden
+		{
+			$('#options_menu').hide(); 
+			$('#testing').text($.cookie('options_menu_status'));
+		}
+		else if($.cookie('options_menu_status').indexOf( 'visible' ) > -1 )
+		{
+			$('#options_menu').show();
+			$('#testing').text($.cookie('options_menu_status'));
+			$('.filter_button').text('Hide Filters');
+		}
 	}
-
-
-
-
 
   	$('#filter_toggle').click(function() {
 	  	if($('#options_menu').is(":visible"))

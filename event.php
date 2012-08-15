@@ -49,7 +49,7 @@ $timestamp = strtotime($row_length[event_time_stamp]);
 <?php //do{echo $image_path.$row_frames['filename'].'-0'.$row_frames['frame']. '.jpg, ';}while($row_frames = mysqli_fetch_array($result_frames))?>
 
 
-
+<h2>Event - <? echo date('l jS F Y h:i:s A',$timestamp);?></h2>
 
 <div id="video">
 	

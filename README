@@ -31,3 +31,9 @@ CREATE TABLE IF NOT EXISTS `security` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5734 ;
 
 Next, create a user, or assign an existing user to the database with full privileges. Enter the user details in includes/conf.php.
+
+Setting up motion.conf
+
+In order for motionPHP to work, you must ensure your motion.conf is set up correctly. There are certain options that must be set correctly in order to be compatible.
+
+[NEEDS COMPLETING]
