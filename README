@@ -16,7 +16,7 @@ Motion must be compiled with mysql for motionPHP to work, and must be compiled w
 
 Certain options in Motion's config file have to set in order to be compatible with motionPHP [needs completing]
 
-Create the following table in database "motion" (or whatever table is defined in includes/conf.php)
+Create the following table in database "motion" (or whatever database is defined in includes/conf.php)
 
 CREATE TABLE IF NOT EXISTS `security` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

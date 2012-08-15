@@ -67,6 +67,8 @@ $average_events_hour =  $total_events /$total_hours;
 
 
 ?>
+
+<h2>Statistics</h2>
 <ul id="statistics">
 	<li>Total events: <?php echo $total_events ?></li>
 	<li>Total time recorded: <?php echo gmdate("H:i:s", $total_length)?></li>

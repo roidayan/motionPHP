@@ -48,6 +48,7 @@ if(!isset($_POST['submit_options']))
 }
 else
 {
+
 	//Set the amount of previews to show
 	if(isset($_POST['preview_limit']))
 	{
@@ -110,6 +111,62 @@ else
 }
 ?>
 
+<!--<script type="text/javascript">
+$(document).ready(function() {
+ // hides the slickbox as soon as the DOM is ready
+  $('#options_menu').hide(); 
+ // toggles the slickbox on clicking the noted link  
+  $('#filter_toggle').click(function() {
+    $('#options_menu').slideToggle(400);
+    return false;
+  });
+});
+</script>-->
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+ 
+	//$options_menu_status = .cookie('options_menu_status');
+	
+	//$('#testing').text($.cookie('options_menu_status'));
+
+
+	if($.cookie('options_menu_status').indexOf( 'hidden' ) > -1 ) //if menu is hidden
+	{
+		$('#options_menu').hide(); 
+		$('#testing').text($.cookie('options_menu_status'));
+	}
+	else if($.cookie('options_menu_status').indexOf( 'visible' ) > -1 )
+	{
+		$('#options_menu').show();
+		$('#testing').text($.cookie('options_menu_status'));
+	}
+
+
+
+
+
+  	$('#filter_toggle').click(function() {
+	  	if($('#options_menu').is(":visible"))
+	  	{	
+	  		$('.filter_button').text('Show Filters');
+	  		$.cookie('options_menu_status','hidden');
+			$('#options_menu').slideUp(400);
+	  	}
+	  	else
+	  	{	
+	  		$('.filter_button').text('Hide Filters');
+	  		$.cookie('options_menu_status','visible');
+	  		$('#options_menu').slideDown(400);
+	  	}
+    
+    	return false;
+  	});
+});
+</script>
+
+<!--<code id="testing"></code>-->
 
 <div id="options_menu">
 	<form action="<?php echo $_server['PHP_SELF']; ?>" method="post">

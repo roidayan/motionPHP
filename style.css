@@ -9,8 +9,8 @@ body{
 	margin-right:10px;
 	padding:0;
 	font-family: 'Verdana', sans-serif;
-	font-size:90%;
-
+	font-size:70%;
+	background-image:url('noiselines.png');
 
 }
 #container {
@@ -28,7 +28,12 @@ h1,h2,h3{
 #header{
 	padding-top:10px;
 	height:80px;
+
 }
+#content{
+background:white;
+clear:both;
+	}
 h1{
 
 }

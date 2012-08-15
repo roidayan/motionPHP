@@ -7,7 +7,7 @@ include('includes/header.php');
 
 
 
-<h2>Latest events</h2>
+<h2>Latest events</h2><a class="link_button filter_button" id="filter_toggle" href="#">Show Filters</a>
 
 <?php
 

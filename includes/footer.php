@@ -1,7 +1,10 @@
 
 
+<div class="clear"></div>
+</div><!--end content-->
 <div class="push"></div>
 </div><!--end container-->
+
 <div id="footer">
 	
 	<div id="footer_menu">
