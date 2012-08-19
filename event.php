@@ -1,3 +1,4 @@
+
 <?php
 //includes
 include('includes/header.php');
@@ -33,13 +34,13 @@ $row_video = mysqli_fetch_array($result_video);
 //out the length of an event (which is possibly a second too long).
 $query_details = "SELECT COUNT(frame) as frame_count, event_time_stamp, TIMESTAMPDIFF( 
 SECOND , MIN( time_stamp ) , MAX( time_stamp ) ) AS length FROM security WHERE file_type = 1 AND event_id = $event_id" ;
-$result_length = mysqli_query($connection, $query_details) or die ("Query Error: $query_details. ".mysql_error());
+$result_details = mysqli_query($connection, $query_details) or die ("Query Error: $query_details. ".mysql_error());
 
 
 //Add the rows to an array.
-$row_length = mysqli_fetch_array($result_length);
+$row_details = mysqli_fetch_array($result_details);
 //Convert the string timestamp of the event to a php timestamp.
-$timestamp = strtotime($row_length[event_time_stamp]);
+$timestamp = strtotime($row_details[event_time_stamp]);
 
 
 
@@ -47,26 +48,43 @@ $timestamp = strtotime($row_length[event_time_stamp]);
 
 
 <?php //do{echo $image_path.$row_frames['filename'].'-0'.$row_frames['frame']. '.jpg, ';}while($row_frames = mysqli_fetch_array($result_frames))?>
+<script type="text/javascript" src="flowplayer-3.2.4.min.js"></script>
 
+<h2>Event - <? if(date("Y-m-d",$timestamp) == date("Y-m-d"))
+	{
+		echo 'Today '.date('h:i:s A',$timestamp);
+	}
+	else
+	{
+		echo date('l jS F Y h:i:s A',$timestamp);	
+	}?>
+</h2>
 
-<h2>Event - <? echo date('l jS F Y h:i:s A',$timestamp);?></h2>
+<div id="video" class="video">
+	  <script type="text/javascript">
+      $(document).ready(function () {
 
-<div id="video">
+      flowplayer("player", "scripts/flowplayer-3.2.14.swf");
+      });
+    </script>
+	<div id="video_object">
+		<a  
+			 href="<?php echo $image_path.$row_video['filename'].'.swf' ?>"
+			 style="display:block;width:520px;height:330px"  
+			 id="player"> 
+		</a>
+	</div>
 	
 		
 		
-		<object data="<?php echo $image_path.$row_video['filename'].'.avi' ?>" width="640" height="360">
+		<!--<object data="<?php echo $image_path.$row_video['filename'].'.avi' ?>" width="640" height="360">
 	   		<embed src="<?php echo $image_path.$row_video['filename'].'.avi' ?>" width="640" height="360" />
-	  	</object> 
+	  	</object> -->
 
 
-	<ul id="video-details" class="detail-list">
-		<?php
-			//Details 
-			echo '<li>Length: '.date('H:i:s', $row_length['length']).'</li>';
-			echo '<li>Time: '.date('l jS F Y h:i:s A',$timestamp).'</li>';
-			echo '<li>Frames: '.$row_length['frame_count'].'</li>';
-		?>
+	<ul id="video-details" class="detail_list">
+		<li class="save_item"><span class="save_detail">Save</span><a href="<?php echo $image_path.$row_video['filename'].'.avi' ?>">Download video</a></li>
+		<?include('includes/detail_list.php');?>
 		<li class"delete_event">
 			<?php 
 				echo '<form action="'.$_server['PHP_SELF'].'" method="post">';
@@ -90,6 +108,7 @@ $timestamp = strtotime($row_length[event_time_stamp]);
 				echo '</form>';
 			?>
 		</li>
+		
 	</ul>
 </div>
 

@@ -73,7 +73,21 @@ $average_events_hour =  $total_events /$total_hours;
 	<li>Total events: <?php echo $total_events ?></li>
 	<li>Total time recorded: <?php echo gmdate("H:i:s", $total_length)?></li>
 	<li>Average length of event: <?php echo gmdate("H:i:s", $average_length)?></li>
-	<li>Longest Event: <?php echo gmdate("H:i:s", $longest_event_length).' On '.'<a href="event.php?id='.$longest_event_id.'">'.date('l jS F Y h:i:s A',$longest_event_time)?></a></li>
+	<li>Longest Event: 
+		<?php 
+			echo gmdate("H:i:s", $longest_event_length);
+			
+			if(date("Y-m-d",$timestamp) == date("Y-m-d"))
+			{
+				echo ' <a href="event.php?id='.$longest_event_id.'">Today '.date('h:i:s A',$longest_event_time).'</a>';	
+			}
+			else
+			{
+				echo ' On '.'<a href="event.php?id='.$longest_event_id.'">'.date('l jS F Y h:i:s A',$longest_event_time).'</a>';	
+			}
+			
+		?>
+	</li>
 	<li>Average events per hour: <?php echo number_format($average_events_hour) ?></li>
 	<li>Amount of days in database: <?php echo $number_of_days ?></li>
 </ul>

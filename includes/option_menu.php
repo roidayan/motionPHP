@@ -12,17 +12,14 @@
 $limit_options = array(6,9,12,15);
 $order_sort_options = array('ASC', 'DESC');
 $order_criteria_options = array('length','event_time_stamp');
-$no_cameras = array(); //gets items for the array in the camera query below
+$no_cameras = $no_cameras;
 $dates = array(); // stores the dates in database in an arary
 $longer_than_options = array(0,5,10,15,30,60,120,240); //time in seconds to filter by
 //Queries for filling some dropdown lists.
 
-//Find out how many cameras there are in the database.
-$query_camera = "SELECT DISTINCT camera FROM security ORDER BY camera ASC";
-$result_camera = mysqli_query($connection, $query_camera) or die ("Query Error: $query_camera. ".mysql_error());
 
 //Find out dates stored 
-$query_dates = "SELECT DATE(event_time_stamp) as date, event_time_stamp from security GROUP BY date";
+$query_dates = "SELECT DATE(event_time_stamp) as date, event_time_stamp from security GROUP BY date ORDER BY date DESC";
 $result_dates = mysqli_query($connection, $query_dates) or die ("Query Error: $query_dates. " .mysqli_error());
 
 //Add cameras to array
@@ -226,10 +223,13 @@ $(document).ready(function() {
 		</select>
 		<label>camera:</label>
 
+
+
+
 		<select name="camera">
 		<option value="'%'">All</option>
 			<?php 
-				foreach($no_cameras as $c)
+				for($c = 1; $c <= $no_cameras; $c++)
 				{
 					if($camera == $c)
 						{echo '<option selected="selected" value="'.$c.'">'.$c.'</option>';}
@@ -238,6 +238,8 @@ $(document).ready(function() {
 				}
 			?>
 		</select>
+
+
 
 		<label>longer than:</label>
 		<select name="longer_than">

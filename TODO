@@ -1,8 +1,6 @@
 List of things to do in no particular order:
 
-- Add notes to event
-- Styling
-- Options for database clean up script
+- Multiple live camera support
 - Documentation
 	- Page headers - description etc..
-- Change motion filenames to support multiple cameras
+-Optimise query on home page

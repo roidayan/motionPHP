@@ -7,33 +7,72 @@ Features:
 - See all frames for an event
 - View the events recorded by different cameras
 - Watch the recorded video (swf, mpeg etc) of an event
+- Multiple camera support
 
-This is my first PHP project and is very much a work in progress. Documentation is coming soon.
+This is my first PHP project and is very much experimental.
 
+Setting up motionPHP
 
-Documentation (this is just the jist, full documentation will be written soon): 
-Motion must be compiled with mysql for motionPHP to work, and must be compiled with ffmpeg if you want videos to work.
+1. Install Motion
+Install Motion (http://www.lavrsen.dk/foswiki/bin/view/Motion/WebHome). Ensure it is compiled with at least MySQL support. If you want to be able to view recorded videos in your browser, Motion must be compiled with FFMPEG as well. motionPHP was developed using the latest trunk version (REV554) of Motion, but should work with the latest stable release (3.2.12).
 
-Certain options in Motion's config file have to set in order to be compatible with motionPHP [needs completing]
+2. Install web server
+In order to use motionPHP the machine running Motion needs a web server as well as PHP and MySQL support. I found the easiest way was to install LAMP (Linux, Apache, MySQL, PHP) following this guide http://wiki.debian.org/LaMp
 
-Create the following table in database "motion" (or whatever database is defined in includes/conf.php)
+3. Set up database
+When Motion records a snapshot, it is able to insert a row into a mysql table. motionPHP works by accessing these rows, putting them together to form events. Log into phpmyadmin (usually http://localhost/phpmyadmin or http://<IP>/phpmyadmin) with the password you set while installing LAMP. Create a database called 'motion' and run the following SQL script to create the table required for motionPHP:
 
-CREATE TABLE IF NOT EXISTS `security` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `camera` int(11) NOT NULL,
-  `event_id` bigint(20) NOT NULL,
-  `filename` char(80) NOT NULL,
-  `frame` int(11) NOT NULL,
-  `file_type` int(11) NOT NULL,
-  `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `event_time_stamp` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5734 ;
+	CREATE TABLE IF NOT EXISTS `security` (
+	  `id` int(11) NOT NULL AUTO_INCREMENT,
+	  `camera` int(11) NOT NULL,
+	  `event_id` bigint(20) NOT NULL,
+	  `filename` char(80) NOT NULL,
+	  `frame` int(11) NOT NULL,
+	  `file_type` int(11) NOT NULL,
+	  `time_stamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	  `event_time_stamp` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+	  PRIMARY KEY (`id`)
+	) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5734 ;
 
-Next, create a user, or assign an existing user to the database with full privileges. Enter the user details in includes/conf.php.
+4. Create a user for the database 'motion'
+In phpmyadmin, create a user and grant them full permission to the database motion
 
-Setting up motion.conf
+5.Configure Motion
+Open up Motion's config file (usually /etc/motion/motion.conf or /usr/local/etc/motion.conf). Find the following options and ensure they match the values below.
 
-In order for motionPHP to work, you must ensure your motion.conf is set up correctly. There are certain options that must be set correctly in order to be compatible.
+	ffmpeg_output_movies on
+	ffmpeg_video_codec mpeg4 #Although this may be changed to swf in the future.
+	text_event %Y%m%d%H%M%S
+	target_dir /media/hdd/camera #Change this to where you want Motion to store images.
+	snapshot_filename lastsnap_%t
+	picture_filename %v-%Y%m%d%H%M%S-%q
+	movie_filename %v-%Y%m%d%H%M%S
+	sql_log_picture on
+	sql_log_snapshot off
+	sql_log_movie on
+	sql_query insert into security(camera, event_id, filename, frame, file_type, time_stamp, event_time_stamp) values('%t', '%C%t', '%v-%Y%m%d%H%M%S', '%q', '%n', '%Y-%m-%d %T', '%C')
+	database_type mysql #These database options may be named differently in motion 3.1.12
+	database_dbname motion
+	database_host localhost
+	database_user robin #The user you created in step 4
+	database_password meEKQU5U9KpqetCQ #The password you created for the user in step 4
+	database_port 3306
 
-[NEEDS COMPLETING]
+6. Install motionPHP
+Extract motionPHP files to your public_html directory. For me this is in my home folder, e.g. ~/public_html/motionPHP/index.php and is accessed at http://<machine IP>/~robin/motionPHP
+
+7. Configure motionPHP
+Open motionPHP/includes/conf.php in a text editor. If you followed the above instructions for creating the database, you should only need to modify your user name and password in the database section.
+
+$image_path must be configured to point to where Motion stores its snapshots. As the Apache web server cannot access files/directories outside of /public_html/, a symlink must be created to point to where Motion stores images (defined in step 5). Set $image_path to this symlink.
+
+Motion stores images to /media/hdd/camera, so I created the symlink 'camera' in ~/public_html/motionPHP/images/ -> /media/hdd/camera, I then set $image_path to point to that symlink: images/camera/
+
+Next set the amount of cameras Motion is monitoring. This is an experiemental feature at the moment.
+
+8. That's it.
+It's a bit fiddly to set up, but it should now work. Access motionPHP by directing your browser to http://<machine IP>/~<user>/motionPHP. The homepage will display the 6 latest events. You can filter these previews by clicking "Show Filters" and changing the options there. 
+
+Clicking on a thumbnail will take you to that event's page. On this page you can download the video, view each individual frame, or delete an event (although this only deletes the records on the database, not the images/video).
+
+The Live page will display a live image of each camera and the Statistics page shows stats such as the longest event and the total amount of time recorded.
