@@ -211,7 +211,9 @@ display:inline;
 }
 
 #video{
-
+	width:640px;
+	margin-right:auto;
+	margin-left:auto;
 }
 #video-details{
 	width:618px;

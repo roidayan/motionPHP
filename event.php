@@ -1,4 +1,3 @@
-
 <?php
 //includes
 include('includes/header.php');
@@ -48,7 +47,6 @@ $timestamp = strtotime($row_details[event_time_stamp]);
 
 
 <?php //do{echo $image_path.$row_frames['filename'].'-0'.$row_frames['frame']. '.jpg, ';}while($row_frames = mysqli_fetch_array($result_frames))?>
-<script type="text/javascript" src="flowplayer-3.2.4.min.js"></script>
 
 <h2>Event - <? if(date("Y-m-d",$timestamp) == date("Y-m-d"))
 	{
@@ -61,19 +59,12 @@ $timestamp = strtotime($row_details[event_time_stamp]);
 </h2>
 
 <div id="video" class="video">
-	  <script type="text/javascript">
-      $(document).ready(function () {
 
-      flowplayer("player", "scripts/flowplayer-3.2.14.swf");
-      });
-    </script>
-	<div id="video_object">
-		<a  
-			 href="<?php echo $image_path.$row_video['filename'].'.swf' ?>"
-			 style="display:block;width:520px;height:330px"  
-			 id="player"> 
-		</a>
-	</div>
+	<object type="application/x-shockwave-flash" data="scripts/player_flv_mini.swf" width="320" height="240">
+    <param name="movie" value="scripts/player_flv_mini.swf" />
+    <param name="allowFullScreen" value="true" />
+    <param name="FlashVars" value="flv=test.flv" />
+</object>
 	
 		
 		
@@ -83,7 +74,7 @@ $timestamp = strtotime($row_details[event_time_stamp]);
 
 
 	<ul id="video-details" class="detail_list">
-		<li class="save_item"><span class="save_detail">Save</span><a href="<?php echo $image_path.$row_video['filename'].'.avi' ?>">Download video</a></li>
+		<li class="save_item"><span class="save_detail">Save</span><a href="<?php echo $image_path.$row_video['filename'].'.flv' ?>">Download video</a></li>
 		<?include('includes/detail_list.php');?>
 		<li class"delete_event">
 			<?php 
