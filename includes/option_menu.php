@@ -23,10 +23,10 @@ $query_dates = "SELECT DATE(event_time_stamp) as date, event_time_stamp from sec
 $result_dates = mysqli_query($connection, $query_dates) or die ("Query Error: $query_dates. " .mysqli_error());
 
 //Add cameras to array
-while($row_camera = mysqli_fetch_array($result_camera))
-{
-	array_push($no_cameras,$row_camera['camera']);
-}
+//while($row_camera = mysqli_fetch_array($result_camera))
+//{
+//	array_push($no_cameras,$row_camera['camera']);
+//}
 //Add dates to array
 while($row_dates = mysqli_fetch_array($result_dates))
 {
@@ -108,17 +108,7 @@ else
 }
 ?>
 
-<!--<script type="text/javascript">
-$(document).ready(function() {
- // hides the slickbox as soon as the DOM is ready
-  $('#options_menu').hide(); 
- // toggles the slickbox on clicking the noted link  
-  $('#filter_toggle').click(function() {
-    $('#options_menu').slideToggle(400);
-    return false;
-  });
-});
-</script>-->
+
 
 <script type="text/javascript">
 $(document).ready(function() {

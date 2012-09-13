@@ -34,7 +34,7 @@ $row_video = mysqli_fetch_array($result_video);
 $query_details = "SELECT COUNT(frame) as frame_count, event_time_stamp, TIMESTAMPDIFF( 
 SECOND , MIN( time_stamp ) , MAX( time_stamp ) ) AS length FROM security WHERE file_type = 1 AND event_id = $event_id" ;
 $result_details = mysqli_query($connection, $query_details) or die ("Query Error: $query_details. ".mysql_error());
-
+//echo $query_details;
 
 //Add the rows to an array.
 $row_details = mysqli_fetch_array($result_details);

@@ -77,7 +77,7 @@ $average_events_hour =  $total_events /$total_hours;
 		<?php 
 			echo gmdate("H:i:s", $longest_event_length);
 			
-			if(date("Y-m-d",$timestamp) == date("Y-m-d"))
+			if(date("Y-m-d",$longest_event_time) == date("Y-m-d"))
 			{
 				echo ' <a href="event.php?id='.$longest_event_id.'">Today '.date('h:i:s A',$longest_event_time).'</a>';	
 			}
