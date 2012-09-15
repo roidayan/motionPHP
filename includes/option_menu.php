@@ -19,7 +19,7 @@ $longer_than_options = array(0,5,10,15,30,60,120,240); //time in seconds to filt
 
 
 //Find out dates stored 
-$query_dates = "SELECT DATE(event_time_stamp) as date, event_time_stamp from security GROUP BY date ORDER BY date DESC";
+$query_dates = "SELECT DATE(event_time_stamp) as date, event_time_stamp from $table  GROUP BY date ORDER BY date DESC";
 $result_dates = mysqli_query($connection, $query_dates) or die ("Query Error: $query_dates. " .mysqli_error());
 
 //Add cameras to array
@@ -39,7 +39,7 @@ if(!isset($_POST['submit_options']))
 	$limit = 6;
 	$order_by = 'DESC';
 	$order_criteria = 'event_time_stamp';
-	$camera = 1;
+	$camera = '%';
 	$date = '%';
 	$longer_than = 30;
 }
@@ -160,7 +160,7 @@ $(document).ready(function() {
 <!--<code id="testing"></code>-->
 
 <div id="options_menu">
-	<form action="<?php echo $_server['PHP_SELF']; ?>" method="post">
+	<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 		<label>Show:</label>
 		<select name="preview_limit">
 		<option value="2147483647">All</option>	

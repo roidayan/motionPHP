@@ -12,6 +12,8 @@ $user = "robin";
 $pass = "meEKQU5U9KpqetCQ";
 //Name of database.
 $db = "motion";
+//Table
+$table = "security";
 
 //Image path to where Motion stores snapshots. I created a symlink in images to the camera folder. 
 //For example: Motion stores images to /media/hdd/camera but it would be dificult to access this via Apache.
@@ -20,7 +22,7 @@ $db = "motion";
 $image_path = 'images/camera/';
 
 //No. of cameras/threads being monitored by Motion
-$no_cameras = 1;
+$no_cameras = 4;
 
 //don't modify this line.
 $connection = mysqli_connect($host, $user, $pass, $db) or die ("unable to connect");

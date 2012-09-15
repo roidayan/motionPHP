@@ -17,13 +17,13 @@ else
 
 //queries
 //Query to get all the frames and event_time_stamp from the specified event id.
-$query_frames = "SELECT event_time_stamp,frame, filename FROM security WHERE event_id = $event_id AND file_type = 1 ORDER BY time_stamp ASC";
+$query_frames = "SELECT event_time_stamp,frame, filename FROM $table WHERE event_id = $event_id AND file_type = 1 ORDER BY time_stamp ASC";
 $result_frames = mysqli_query($connection, $query_frames) or die ("Query Error: $query_frames ".mysql_error());
 $row_frames = mysqli_fetch_array($result_frames);
 
 //Query to get filename of movie.
 
-$query_video = "SELECT event_time_stamp,frame, filename FROM security WHERE event_id = $event_id AND file_type = 8";
+$query_video = "SELECT event_time_stamp,frame, filename FROM $table WHERE event_id = $event_id AND file_type = 8";
 $result_video = mysqli_query($connection, $query_video) or die ("Query Error: $query_video ".mysql_error());
 $row_video = mysqli_fetch_array($result_video);
 
@@ -32,7 +32,7 @@ $row_video = mysqli_fetch_array($result_video);
 //in the WHERE clause. Also gets the latest(max) and earliest(min) timestamps in order to work 
 //out the length of an event (which is possibly a second too long).
 $query_details = "SELECT COUNT(frame) as frame_count, event_time_stamp, TIMESTAMPDIFF( 
-SECOND , MIN( time_stamp ) , MAX( time_stamp ) ) AS length FROM security WHERE file_type = 1 AND event_id = $event_id" ;
+SECOND , MIN( time_stamp ) , MAX( time_stamp ) ) AS length FROM $table WHERE file_type = 1 AND event_id = $event_id" ;
 $result_details = mysqli_query($connection, $query_details) or die ("Query Error: $query_details. ".mysql_error());
 //echo $query_details;
 
@@ -78,7 +78,7 @@ $timestamp = strtotime($row_details[event_time_stamp]);
 		<?include('includes/detail_list.php');?>
 		<li class"delete_event">
 			<?php 
-				echo '<form action="'.$_server['PHP_SELF'].'" method="post">';
+				echo '<form action="'.$_SERVER['PHP_SELF'].'" method="post">';
 				if(!isset($_POST['submit_delete']))
 				{
 					echo '<input type="submit" value="Delete" name="submit_delete"/>';
@@ -92,7 +92,7 @@ $timestamp = strtotime($row_details[event_time_stamp]);
 				}
 				if(isset($_POST['delete_event']))
 					{
-						$query_delete = "DELETE FROM security WHERE event_id = $event_id";
+						$query_delete = "DELETE FROM $table WHERE event_id = $event_id";
 						$result_delete = mysqli_query($connection, $query_delete) or die ("Query Error: $query_delete. ".mysql_error());
 						header('Location: index.php');
 					}

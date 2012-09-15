@@ -18,7 +18,7 @@ $number_of_days = 0;
 
 //Queries
 //Query to get amount of days/dates etc.
-$query_dates = "SELECT DATE(event_time_stamp) as date, event_time_stamp from security GROUP BY date";
+$query_dates = "SELECT DATE(event_time_stamp) as date, event_time_stamp from $table GROUP BY date";
 $result_dates = mysqli_query($connection, $query_dates) or die ("Query Error: $query_dates. " .mysqli_error());
 
 
@@ -29,7 +29,7 @@ while($row_dates =  mysqli_fetch_array($result_dates))
 
 
 //query gets all fields and the length of each event. Is also used to calculate total events in PHP.
-$query_length = "SELECT *, TIMESTAMPDIFF(SECOND , MIN(time_stamp ),MAX( time_stamp )) AS length FROM security GROUP BY event_id";
+$query_length = "SELECT *, TIMESTAMPDIFF(SECOND , MIN(time_stamp ),MAX( time_stamp )) AS length FROM $table GROUP BY event_id";
 $result_length = mysqli_query($connection, $query_length) or die ("Query Error: $query_length. ".mysql_error());
 
 
@@ -62,7 +62,7 @@ $total_hours = $total_length / 3600;
 $average_events_hour =  $total_events /$total_hours;
 
 
-//$query_totals = "SELECT MAX(time_stamp), MIN(time_stamp), event_id FROM security GROUP BY event_id";
+//$query_totals = "SELECT MAX(time_stamp), MIN(time_stamp), event_id FROM $table GROUP BY event_id";
 //$result_totals = mysqli_query($connection, $query_length) or die ("Query Error: $query_length. ".mysql_error());
 
 
