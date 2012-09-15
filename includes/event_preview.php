@@ -6,7 +6,7 @@
 			
 $query_details = "SELECT COUNT(frame) as frame_count,id, camera, event_id, filename, frame, file_type, time_stamp, event_time_stamp, TIMESTAMPDIFF( 
 SECOND , MIN( time_stamp ) , MAX( time_stamp ) ) AS length
-FROM $table WHERE DATE(event_time_stamp) LIKE '$date' AND camera LIKE $camera 
+FROM $table WHERE DATE(event_time_stamp) LIKE '$date' AND camera LIKE '$camera'
 GROUP BY event_id 
 HAVING TIMESTAMPDIFF( SECOND , MIN( time_stamp ) , MAX( time_stamp ) ) > $longer_than
 ORDER BY $order_criteria $order_by 
