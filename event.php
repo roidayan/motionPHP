@@ -39,7 +39,7 @@ $result_details = mysqli_query($connection, $query_details) or die ("Query Error
 //Add the rows to an array.
 $row_details = mysqli_fetch_array($result_details);
 //Convert the string timestamp of the event to a php timestamp.
-$timestamp = strtotime($row_details[event_time_stamp]);
+$timestamp = strtotime($row_details['event_time_stamp']);
 
 
 
