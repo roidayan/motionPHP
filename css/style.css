@@ -1,0 +1,17 @@
+.frame_list
+{
+
+	margin:0;
+	padding:0;
+	overflow-y: hidden ! important; overflow-x: auto ! important;
+	white-space:nowrap;
+	text-align:center;
+}
+.frame_list li
+{
+display:inline;
+}
+.frame_list img{
+	height:50px;
+	width:75px;
+}
