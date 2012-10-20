@@ -59,14 +59,20 @@ $timestamp = strtotime($row_details['event_time_stamp']);
 
 <div class="row">
 	<div class="span9">
-		<img width="100%" class="event_preview" src="http://www.placehold.it/300x200"/>
+		<video controls="true" width="50%">
+<?
+//		<img width="100%" class="event_preview" src="http://www.placehold.it/300x200"/>
+	echo '<source src="' . $image_path.baseimage($row_video['filename']) . '" type="' . $video_type . '">';
+?>
+			No support for video playback.
+		</video>
 	</div>
 	<div class="span3">
 	<div class="well">
 	<ul class="unstyled">
 
 		<?php include('includes/detail_list.php');?>
-		<li><a style="margin-bottom:5px;" class="btn btn-primary btn-block" href="<?php echo $image_path.$row_video['filename'].'.flv' ?>"><i class="icon-download icon-white"></i> Download</a></li>
+		<li><a style="margin-bottom:5px;" class="btn btn-primary btn-block" href="<?php echo $image_path.baseimage($row_video['filename']) ?>"><i class="icon-download icon-white"></i> Download</a></li>
 		<li class"delete_event">
 			<?php 
 				echo '<form action="'.$_SERVER['PHP_SELF'].'?id='.$event_id.'" method="post">';
@@ -106,7 +112,8 @@ $timestamp = strtotime($row_details['event_time_stamp']);
 
 //loop to display all frames.
 do{
-	echo '<li><a href="'.$image_path.$row_frames['filename'].'-0'.$row_frames['frame']. '.jpg"><img class="frame_event_preview" src="'.$image_path.$row_frames['filename'].'-0'.$row_frames['frame']. '.jpg"/></a></li>';
+	$f=$image_path.baseimage($row_frames['filename']);
+	echo '<li><a href="'.$f. '"><img class="frame_event_preview" src="'.$f. '"/></a></li>';
 }while($row_frames = mysqli_fetch_array($result_frames))
 
 
