@@ -34,7 +34,7 @@ if(!isset($_GET['submit_options']))
 	$order_criteria = 'event_time_stamp';
 	$camera = '%';
 	$date = '%';
-	$longer_than = 30;
+	$longer_than = 0;
 }
 else
 {
@@ -93,10 +93,10 @@ else
 	{
 		$longer_than = $_GET['longer_than'];
 	}
-	//else set it to the default of 30.
+	//else set it to the default of 0.
 	else
 	{
-		$longer_than = 30;
+		$longer_than = 0;
 	}
 }
 ?>
