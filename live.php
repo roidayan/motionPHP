@@ -5,7 +5,7 @@ include('includes/header.php');
 
 <script type="text/javascript">
 	$(document).ready(function() {
-	   setInterval('reloadImages()', 2500); // 60 seconds
+	   //setInterval('reloadImages()', 2500); // 60 seconds
 	   });
 	function reloadImages()
 	{
@@ -27,7 +27,9 @@ include('includes/header.php');
 			for($c = 1; $c <= $no_cameras; $c++)
 			{
 				echo '<h3>Camera '.$c.'</h3>';
-				echo '<img src="images/camera/lastsnap_'.$c.'.jpg" class="live_image'.$c.'" class="video"/>';
+				//echo '<img src="images/camera/lastsnap_'.$c.'.jpg" class="live_image'.$c.'" class="video"/>';
+				$cam = 'http://'.$_SERVER['HTTP_HOST'].'/cam'.$c;
+				echo '<iframe class="live_cam" src="'.$cam.'"></iframe>';
 			}
 			?>
 		</div>

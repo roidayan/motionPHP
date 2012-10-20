@@ -15,3 +15,9 @@ display:inline;
 	height:50px;
 	width:75px;
 }
+
+.live_cam {
+	border:0;
+	width:200px;
+	height:200px;
+}
