@@ -23,7 +23,7 @@ while($row_dates =  mysqli_fetch_array($result_dates))
 
 
 //query gets all fields and the length of each event. Is also used to calculate total events in PHP.
-$query_length = "SELECT *, TIMESTAMPDIFF(SECOND , MIN(time_stamp ),MAX( time_stamp )) AS length FROM $table GROUP BY event_id";
+$query_length = "SELECT event_id, event_time_stamp, TIMESTAMPDIFF(SECOND , MIN(time_stamp ),MAX( time_stamp )) AS length FROM $table WHERE file_type = 1 GROUP BY event_id";
 $result_length = mysqli_query($connection, $query_length) or die ("Query Error: $query_length. ".mysql_error());
 
 
@@ -83,7 +83,7 @@ $average_events_hour =  $total_events /$total_hours;
 			<tr>
 				<th>Longest Event</th>
 				<td><?php 
-			echo gmdate("H:i:s", $longest_event_length);
+			echo secondsToTime($longest_event_length);
 			
 			if(date("Y-m-d",$longest_event_time) == date("Y-m-d"))
 			{

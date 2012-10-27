@@ -7,7 +7,7 @@
 $query_details = "SELECT COUNT(frame) as frame_count,id, camera, event_id, filename, frame, file_type, time_stamp, event_time_stamp, TIMESTAMPDIFF( 
 SECOND , MIN( time_stamp ) , MAX( time_stamp ) ) AS length
 FROM $table WHERE DATE(event_time_stamp) LIKE '$date' AND camera LIKE '$camera'
-AND file_type LIKE '1'
+AND file_type = 1
 GROUP BY event_id 
 HAVING length >= $longer_than
 ORDER BY $order_criteria $order_by 
@@ -18,7 +18,6 @@ LIMIT $limit";
 $result = mysqli_query($connection, $query_details) or die ("Query Error: $query_details. ".mysqli_error($connection));
 //Main loop displays the latest events and their details. 
 //Ensure $result matches the page it is being included on.
-
 ?>
 
 				<ul class="thumbnails">
