@@ -2,7 +2,7 @@
 //option menu
 
 
-$limit_options = array(6,9,12,15);
+$limit_options = array(8,9,12,15,30,60,90,120);
 $order_sort_options = array('ASC', 'DESC');
 $order_criteria_options = array('length','event_time_stamp');
 $no_cameras = $no_cameras;
@@ -26,85 +26,45 @@ while($row_dates = mysqli_fetch_array($result_dates))
 	array_push($dates,$row_dates['date']);
 }
 
-//Check for GET. I.e. check whether any sorting has been applied.
-if(!isset($_GET['submit_options']))
-{
-	$limit = 6;
-	$order_by = 'DESC';
-	$order_criteria = 'event_time_stamp';
-	$camera = '%';
-	$date = '%';
-	$longer_than = 0;
-}
-else
-{
+$limit = $limit_options[0];
+$order_by = $order_sort_options[1]; 
+$order_criteria = $order_criteria_options[1];
+$camera = '%';
+$date = '%';
+$longer_than = $longer_than_options[0];
 
+if (isset($_GET['submit_options'])) {
 	//Set the amount of previews to show
 	if(isset($_GET['preview_limit']))
 	{
 		$limit = $_GET['preview_limit'];
 	}
-	//but if its not set then set it to the default 6.
-	else
-	{
-		$limit = 6;
-	}
 	if(isset($_GET['preview_order']))
 	{
 		$order_by = $_GET['preview_order'];
-	}
-	//otherwise set it to default DESC
-	else
-	{
-		$order_by = 'DESC';
 	}
 	//Set the criteria for sorting.
 	if(isset($_GET['preview_order_criteria']))
 	{
 		$order_criteria = $_GET['preview_order_criteria'];
 	}
-	//otherwise set the criteria as the time of the event.
-	else
-	{
-		$order_criteria = 'event_time_stamp';
-	}
 	//Set the camera to view
 	if(isset($_GET['camera']))
 	{
 		$camera = $_GET['camera'];
-	}
-	//else set it to the default of 1.
-	else
-	{
-		$camera = 1;
 	}
 	//Set date to view
 	if(isset($_GET['date']))
 	{
 		$date = $_GET['date'];
 	}
-	//else set it to the default of 1.
-	else
-	{
-		$date = '%';
-	}
 	//Set longer than filter.
 	if(isset($_GET['longer_than']))
 	{
 		$longer_than = $_GET['longer_than'];
 	}
-	//else set it to the default of 0.
-	else
-	{
-		$longer_than = 0;
-	}
 }
 ?>
-
-
-
-
-		
 		<div class="span12">
 			<div class="">
 				<form class="form-inline" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
