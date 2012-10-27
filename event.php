@@ -72,7 +72,7 @@ $timestamp = strtotime($row_details['event_time_stamp']);
 	<ul class="unstyled">
 
 		<?php include('includes/detail_list.php');?>
-		<li><a style="margin-bottom:5px;" class="btn btn-primary btn-block" href="<?php echo $image_path.baseimage($row_video['filename']) ?>"><i class="icon-download icon-white"></i> Download</a></li>
+		<li><a style="margin: 5px 0 5px 0;" class="btn btn-primary btn-block" href="<?php echo $image_path.baseimage($row_video['filename']) ?>"><i class="icon-download icon-white"></i> Download</a></li>
 		<li class"delete_event">
 			<?php 
 				echo '<form action="'.$_SERVER['PHP_SELF'].'?id='.$event_id.'" method="post">';
@@ -83,7 +83,7 @@ $timestamp = strtotime($row_details['event_time_stamp']);
 				}
 				else
 				{
-					echo '<button style="margin-bottom:5px;" class="btn disabled btn-block" type="submit"  name="submit_delete"><i class="icon-remove"></i> Delete</button>';
+					echo '<button style="margin-bottom:5px;" class="btn disabled btn-block" type="submit"  name="submit_delete" disabled="disabled"><i class="icon-remove"></i> Delete</button>';
 					echo '<div style="padding:5px; margin-bottom:0px;" class="alert alert-error"><h4>Are you sure?</h4> Deleting will not remove the image files.<br />';
 					echo '<div style="text-align:center;"><button style="margin-right:5px;"class="btn btn-danger" type="submit" name="delete_event">Delete</button>';
 					echo '<button class="btn btn-success" type="submit" name="delete_event_false">Cancel</button></div></div>';
