@@ -1,11 +1,15 @@
 <?php
 require('includes/conf.php');
 //get current page
-$page = basename($_SERVER['REQUEST_URI']);
+$lastc = substr($_SERVER['REQUEST_URI'], -1);
+if ($lastc == '/')
+	$page = 'index.php';
+else
+	$page = basename($_SERVER['REQUEST_URI']);
 
 $pageTitle = '';
 
-if(strstr($page,'index.php'))
+if(strstr($page,'index.php') or $page=='/')
 {
 	$pageTitle = 'Latest Events';
 }
