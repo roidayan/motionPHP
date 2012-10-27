@@ -59,7 +59,7 @@ $timestamp = strtotime($row_details['event_time_stamp']);
 
 <div class="row">
 	<div class="span9">
-		<video controls="true" width="50%">
+		<video controls="true">
 <?
 //		<img width="100%" class="event_preview" src="http://www.placehold.it/300x200"/>
 	echo '<source src="' . $image_path.baseimage($row_video['filename']) . '" type="' . $video_type . '">';
