@@ -29,7 +29,7 @@ include('includes/header.php');
 				echo '<h3>Camera '.$c.'</h3>';
 				//echo '<img src="images/camera/lastsnap_'.$c.'.jpg" class="live_image'.$c.'" class="video"/>';
 				$cam = 'http://'.$_SERVER['HTTP_HOST'].'/cam'.$c;
-				echo '<iframe class="live_cam" src="'.$cam.'"></iframe>';
+				echo '<iframe class="live_cam" style="width:640px;height:480px;" src="'.$cam.'"></iframe>';
 			}
 			?>
 		</div>
