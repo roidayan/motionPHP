@@ -1,13 +1,12 @@
 <?php
 	//Get the time of the event.
+	echo '  <li><i class="icon-calendar" title="Event time"></i> ';
 	if(date("Y-m-d",$timestamp) == date("Y-m-d"))
-	{
-		echo '	<li><i class="icon-calendar"></i> '.date('H:i:s',$timestamp).'</li>';
-	}
+		echo date('H:i:s',$timestamp);
 	else
-	{
-		echo '	<li><i class="icon-calendar"></i> '.date('j/n/y H:i:s',$timestamp).'</li>';	
-	}	
+		echo date('j/n/y H:i:s',$timestamp);
+	echo '</li>';	
+		
 	//Format the date to show the length of an event.
 	echo '	<li><i title="Length" class="icon-time"></i> '.secondsToTime($row_details['length']).'</li>';
 	
