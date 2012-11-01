@@ -24,6 +24,8 @@ $video_type = 'video/ogg';
 //No. of cameras/threads being monitored by Motion
 $no_cameras = 1;
 
+$show_max_frames = 20;
+
 //don't modify this line.
 $connection = mysqli_connect($host, $user, $pass, $db) or die ("unable to connect");
 

@@ -19,7 +19,6 @@ else
 //Query to get all the frames and event_time_stamp from the specified event id.
 $query_frames = "SELECT event_time_stamp,frame, filename FROM $table WHERE event_id = $event_id AND file_type = 1 ORDER BY time_stamp ASC";
 $result_frames = mysqli_query($connection, $query_frames) or die ("Query Error: $query_frames ".mysql_error());
-$row_frames = mysqli_fetch_array($result_frames);
 
 //Query to get filename of movie.
 
@@ -106,20 +105,19 @@ $timestamp = strtotime($row_details['event_time_stamp']);
 
 <div class="row">
 	<div class="span12">
-		<ol class="frame_list">
-
 <?php
-
-//loop to display all frames.
-do{
-	$f=$image_path.baseimage($row_frames['filename']);
-	echo '<li><a href="'.$f. '"><img class="frame_event_preview" src="'.$f. '"/></a></li>';
-}while($row_frames = mysqli_fetch_array($result_frames))
-
-
-
-
-
+	//loop to display all frames.
+	if ($result_frames->num_rows < $show_max_frames):
+?>
+		<ol class="frame_list">
+<?php
+	while ($row_frames = mysqli_fetch_array($result_frames)) {
+		$f=$image_path.baseimage($row_frames['filename']);
+		echo '<li><a href="'.$f. '"><img class="frame_event_preview" src="'.$f. '"/></a></li>';
+	}
+	else:
+		echo "Not showing frames.";
+	endif;
 ?>
 		</ol>
 	</div>
