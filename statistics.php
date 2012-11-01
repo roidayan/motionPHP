@@ -1,7 +1,6 @@
 <?php
 include('includes/header.php');
-?>
-<?php
+
 //initialize variables
 $total_events = 0;
 $total_length = 0;
@@ -55,6 +54,16 @@ $average_events_hour =  $total_events /$total_hours;
 //$query_totals = "SELECT MAX(time_stamp), MIN(time_stamp), event_id FROM $table GROUP BY event_id";
 //$result_totals = mysqli_query($connection, $query_length) or die ("Query Error: $query_length. ".mysql_error());
 
+$storage_p = intval(disk_free_space($image_path) * 100 / disk_total_space($image_path));
+$free_p = 100 - $storage_p;
+if ($storage_p > 85)
+	$storage_color = 'progress-danger';
+else if ($storage_p > 70)
+	$storage_color = 'progress-warning';
+else if ($storage_p > 40)
+	$storage_color = 'progress-success';
+else
+	$storage_color = 'progress-info';
 
 ?>
 
@@ -99,6 +108,11 @@ $average_events_hour =  $total_events /$total_hours;
 			<tr>
 				<th>Amount of days in database</th>
 				<td><?php echo $number_of_days ?></td>
+			</tr>
+			<tr>
+				<th>Storage</th>
+				<td><div class="progress <?=$storage_color;?>" style="margin-bottom:5px;" title="<?=$storage_p;?>% used">
+				<div class="bar" style="width:<?=$storage_p;?>%;"></div></div></td>
 			</tr>
 		</tbody>
 		</table>
