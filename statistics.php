@@ -15,11 +15,7 @@ $number_of_days = 0;
 $query_dates = "SELECT DATE(event_time_stamp) as date, event_time_stamp from $table GROUP BY date";
 $result_dates = mysqli_query($connection, $query_dates) or die ("Query Error: $query_dates. " .mysqli_error());
 
-
-while($row_dates =  mysqli_fetch_array($result_dates))
-{
-	$number_of_days ++;
-}
+$number_of_days = $result_dates->num_rows;
 
 
 //query gets all fields and the length of each event. Is also used to calculate total events in PHP.
