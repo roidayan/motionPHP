@@ -5,7 +5,6 @@
 $limit_options = array(8,9,12,15,30,60,90,120);
 $order_sort_options = array('ASC', 'DESC');
 $order_criteria_options = array('length','event_time_stamp');
-$no_cameras = $no_cameras;
 $dates = array(); // stores the dates in database in an arary
 $longer_than_options = array(0,5,10,15,30,60,120,240); //time in seconds to filter by
 //Queries for filling some dropdown lists.
@@ -15,11 +14,6 @@ $longer_than_options = array(0,5,10,15,30,60,120,240); //time in seconds to filt
 $query_dates = "SELECT DATE(event_time_stamp) as date, event_time_stamp from $table  GROUP BY date ORDER BY date DESC";
 $result_dates = mysqli_query($connection, $query_dates) or die ("Query Error: $query_dates. " .mysqli_error());
 
-//Add cameras to array
-//while($row_camera = mysqli_fetch_array($result_camera))
-//{
-//	array_push($no_cameras,$row_camera['camera']);
-//}
 //Add dates to array
 while($row_dates = mysqli_fetch_array($result_dates))
 {
