@@ -48,11 +48,11 @@ $timestamp = strtotime($row_details['event_time_stamp']);
 
 <h2>Event - <?php if(date("Y-m-d",$timestamp) == date("Y-m-d"))
 	{
-		echo 'Today '.date('h:i:s A',$timestamp);
+		echo 'Today '.date('H:i:s A',$timestamp);
 	}
 	else
 	{
-		echo date('l jS F Y h:i:s A',$timestamp);	
+		echo date('l jS F Y H:i:s A',$timestamp);	
 	}?>
 </h2>
 
