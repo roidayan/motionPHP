@@ -45,7 +45,7 @@ elseif(strstr($page,'statistics.php'))
 </head>
 <body>
 	
-		<div class="navbar navbar-static-top">
+		<div class="navbar navbar-fixed-top">
 			
 			<div class="navbar-inner">
 				<div class="container">
