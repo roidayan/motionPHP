@@ -1,13 +1,17 @@
-
 <?php
 //query
 //Get latest events from database. The order and limit of the results are defined by what is set in
 //the drop down list in /includes/option_menu.php. If nothing is set defaults are used.
-			
+
+$tmp_table = "SELECT * FROM $table AS T
+WHERE DATE(event_time_stamp) LIKE '$date'
+AND camera LIKE '$camera'
+AND file_type = 1
+ORDER BY $order_criteria $order_by LIMIT $query_max_rows";
+
 $query_details = "SELECT COUNT(frame) as frame_count,id, camera, event_id, filename, frame, file_type, time_stamp, event_time_stamp, TIMESTAMPDIFF( 
 SECOND , MIN( time_stamp ) , MAX( time_stamp ) ) AS length
-FROM $table WHERE DATE(event_time_stamp) LIKE '$date' AND camera LIKE '$camera'
-AND file_type = 1
+FROM ($tmp_table) AS T2
 GROUP BY event_id 
 HAVING length >= $longer_than
 ORDER BY $order_criteria $order_by 

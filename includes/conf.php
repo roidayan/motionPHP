@@ -24,5 +24,8 @@ $video_type = 'video/ogg';
 //No. of cameras/threads being monitored by Motion
 $no_cameras = 2;
 
+// Only show event frames if there are max X evets.
 $show_max_frames = 20;
 
+// For optimizing mysql query limit queries to max records.
+$query_max_rows = 1000;
