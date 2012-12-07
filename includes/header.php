@@ -1,5 +1,9 @@
 <?php
 require('includes/conf.php');
+require('includes/funcs.php');
+//connect database
+$connection = mysqli_connect($host, $user, $pass, $db) or die ("unable to connect");
+
 //get current page
 $lastc = substr($_SERVER['REQUEST_URI'], -1);
 if ($lastc == '/')
