@@ -1,7 +1,8 @@
 <?php
 require('includes/conf.php');
+// must be after conf.php
 require('includes/funcs.php');
-//connect database
+// connect database
 $connection = mysqli_connect($host, $user, $pass, $db) or die ("unable to connect");
 
 //get current page

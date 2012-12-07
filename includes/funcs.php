@@ -1,6 +1,7 @@
 <?php
 
 function baseimage($image) {
+	global $image_path;
 	$strip_path = realpath($image_path);
 	$i = $image;
 	if (substr_compare($image, $strip_path, 0))
