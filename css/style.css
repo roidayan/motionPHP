@@ -23,3 +23,9 @@ display:inline;
 .live_cam {
 	border:0;
 }
+
+.thumbnail > a > img {
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
+}

@@ -28,16 +28,17 @@ $result = mysqli_query($connection, $query_details) or die ("Query Error: $query
 <?php
 	while($row_details = mysqli_fetch_array($result))
 	{
-	$timestamp = strtotime($row_details['event_time_stamp']); //convert the event's time stamp from a string to a timestamp.
-	echo '<li class="span3">';
-	echo '<div class="thumbnail">';
-	//Display an image of the event and link to the event page for that event.
-	echo '<a href="event.php?id='.$row_details['event_id'].'"><img style="width:100%" src="'.$image_path.baseimage($row_details['filename']).'"/></a>';
-	//echo '<a href="event.php?id='.$row_details['event_id'].'"><img width="100%" src="http://www.placehold.it/300x200"/></a>';
-	echo '<ul class="unstyled">';
-	include('includes/detail_list.php');
-
-	echo '</ul></div></li>';
+		//convert the event's time stamp from a string to a timestamp.
+		$timestamp = strtotime($row_details['event_time_stamp']);
+		echo '<li class="span3">';
+		echo '<div class="thumbnail">';
+		//Display an image of the event and link to the event page for that event.
+		$event_link = 'event.php?id=' . $row_details['event_id'];
+		$event_img = $image_path . baseimage($row_details['filename']);
+		echo '<a href="' . $event_link  . '"><img src="' . $event_img . '"></a>';
+		echo '<ul class="unstyled">';
+		include('includes/detail_list.php');
+		echo '</ul></div></li>';
 	}
 
 ?>
