@@ -4,7 +4,7 @@
 	if(date("Y-m-d",$timestamp) == date("Y-m-d"))
 		echo date('H:i:s',$timestamp);
 	else
-		echo date('j/n/y H:i:s',$timestamp);
+		echo date('j/n/Y H:i:s',$timestamp);
 	echo '</li>';	
 		
 	//Format the date to show the length of an event.
