@@ -111,8 +111,8 @@ else
 			</tr>
 			<tr>
 				<th>Storage</th>
-				<td><div class="progress <?=$storage_color;?>" style="margin-bottom:0;" title="<?=$storage_p;?>% used">
-				<div class="bar" style="width:<?=$storage_p;?>%;"></div></div></td>
+				<td><div class="progress <?=$storage_color;?>" style="margin-bottom:0;">
+				<div class="bar" style="width:<?=$storage_p;?>%;"><?=$storage_p;?>%</div></div></td>
 			</tr>
 		</tbody>
 		</table>
