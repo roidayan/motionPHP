@@ -114,15 +114,15 @@ if (isset($_GET['submit_options'])) {
 				
 			</select>
 			<label>camera:</label>
-			<select class="input-mini" name="camera">
+			<select class="input-small" name="camera">
 			<option value="%">All</option>
 				<?php 
-					for($c = 1; $c <= $no_cameras; $c++)
+					for($c = 1; $c <= count($cameras); $c++)
 					{
 						if($camera == $c)
-							{echo '<option selected="selected" value="'.$c.'">'.$c.'</option>';}
+							echo '<option selected="selected" value="'.$c.'">'.$cameras[$c-1].'</option>';
 						else
-							{echo '<option value="'.$c.'">'.$c.'</option>';}
+							echo '<option value="'.$c.'">'.$cameras[$c-1].'</option>';
 					}
 				?>
 			</select>

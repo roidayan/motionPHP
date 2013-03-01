@@ -21,8 +21,9 @@ $table = "security";
 $image_path = 'images/';
 $video_type = 'video/ogg';
 
-//No. of cameras/threads being monitored by Motion
-$no_cameras = 2;
+//Cameras being monitored by Motion
+//Order should be the same as motion threads order
+$cameras = array('Kitchen', 'Living Room');
 
 // Only show event frames if there are max X evets.
 $show_max_frames = 20;
